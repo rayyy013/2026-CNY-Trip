@@ -6,12 +6,15 @@
     <title>🇯🇵 日本關西七日遊行程 ✈️</title>
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2980b9;
-            --accent-color: #27ae60;
+            --primary-color: #007BFF;
+            --secondary-color: #0056b3;
+            --light-blue-bg: #e7f3ff;
+            --border-color: #bce0fd;
             --text-color: #333;
-            --bg-color: #f4f7f6;
-            --card-bg: #ffffff;
+            --bg-color: #f8f9fa;
+        }
+        html {
+            scroll-behavior: smooth;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
@@ -24,7 +27,7 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background-color: var(--card-bg);
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -53,18 +56,13 @@
             color: #555;
             border-radius: 20px;
             transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-        .tab-button:hover {
-            background-color: #e9e9e9;
-            border-color: #ccc;
         }
         .tab-button.active {
             color: white;
             font-weight: bold;
             background-color: var(--primary-color);
             border-color: var(--primary-color);
-            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.4);
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.4);
         }
         .day-content {
             display: none;
@@ -80,8 +78,7 @@
         .day-header {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
+            margin-bottom: 20px;
         }
         .day-header h2 {
             margin: 0;
@@ -91,92 +88,122 @@
         .day-title {
             font-size: 1.1em;
             font-weight: bold;
-            color: #555;
+            color: var(--secondary-color);
             margin-left: 12px;
-            background-color: #ecf0f1;
+            background-color: var(--light-blue-bg);
             padding: 5px 12px;
             border-radius: 8px;
         }
-        .attraction-list {
-            list-style-type: none;
-            padding-left: 0;
+        
+        /* Accordion Styles */
+        .accordion-item {
+            border-bottom: 1px solid #eee;
         }
-        .attraction-item {
-            padding: 15px 0;
-            border-bottom: 1px dashed #ccc;
-        }
-        .attraction-item:last-child {
+        .accordion-item:last-child {
             border-bottom: none;
         }
-        .attraction-name {
-            font-weight: bold;
+        .accordion-header {
+            width: 100%;
+            background-color: #fff;
+            border: none;
+            text-align: left;
+            padding: 15px 5px;
             font-size: 1.1em;
+            font-weight: bold;
             color: var(--secondary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
         }
-        .attraction-time {
-            font-size: 0.9em;
-            color: #888;
-            margin-right: 10px;
-            display: block;
-            margin-bottom: 4px;
+        .accordion-header:hover {
+            background-color: #f9f9f9;
         }
-        .attraction-desc {
-            font-size: 0.95em;
-            color: #666;
-            margin-top: 5px;
-            padding-left: 12px;
-            border-left: 3px solid #bdc3c7;
+        .accordion-header::after {
+            content: '+';
+            font-size: 1.5em;
+            color: var(--primary-color);
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        .accordion-header.active::after {
+            content: '−';
+            transform: rotate(180deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding: 0 15px;
+            background-color: #fafafa;
+        }
+        .accordion-content p {
+            margin: 10px 0;
         }
         .nav-button {
             display: inline-block;
-            margin-top: 12px;
+            margin-top: 10px;
+            margin-bottom: 15px;
             padding: 8px 15px;
-            background-color: var(--accent-color);
+            background-color: var(--primary-color);
             color: white;
             text-decoration: none;
             border-radius: 8px;
             font-size: 0.95em;
-            font-weight: 500;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease;
         }
         .nav-button:hover {
-            background-color: #229954;
-            transform: translateY(-2px);
+            background-color: var(--secondary-color);
         }
         .accommodation {
             margin-top: 15px;
             padding: 15px;
-            background-color: #fffbe6;
-            border: 1px solid #ffeeba;
+            background-color: var(--light-blue-bg);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
         }
-        .accommodation .attraction-name {
-            color: #c09853;
+        .accommodation .accordion-header {
+            background-color: transparent;
+            padding: 0;
+            font-size: 1.1em;
         }
-        .note {
-            font-style: italic;
-            color: #e74c3c;
+        .accommodation .accordion-header:hover {
+            background-color: transparent;
         }
+        .accommodation .accordion-header::after {
+            display: none;
+        }
+        
+        /* Back to Top Button */
+        #backToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: opacity 0.3s, background-color 0.3s;
+        }
+        #backToTopBtn:hover {
+            background-color: var(--secondary-color);
+        }
+        
         /* Mobile Optimization */
         @media (max-width: 600px) {
-            body {
-                padding: 5px;
-            }
-            .container {
-                padding: 15px;
-            }
-            h1 {
-                font-size: 1.5em;
-            }
-            .day-header h2 {
-                font-size: 1.4em;
-            }
-            .day-title {
-                font-size: 1em;
-            }
-            .attraction-name {
-                font-size: 1.05em;
-            }
+            body { padding: 5px; }
+            .container { padding: 15px; }
+            h1 { font-size: 1.5em; }
         }
     </style>
 </head>
@@ -200,173 +227,195 @@
             <div class="day-header">
                 <h2>2/6 (五)</h2><span class="day-title">抵達當天 ✈️</span>
             </div>
-            <ul class="attraction-list">
-                <li class="attraction-item">
-                    <span class="attraction-time">08:20-15:30</span> <span class="attraction-name">交通移動 (TPE → 倉敷) 🚄</span>
-                    <p class="attraction-desc">從桃園機場出發，抵達關西機場後，搭乘 Haruka 與山陽號前往倉敷車站。</p>
+            <div class="accordion-item">
+                <button class="accordion-header">交通移動 (航班 BR132) 🚄</button>
+                <div class="accordion-content">
+                    <p>從桃園機場出發，抵達關西機場後，搭乘 Haruka 與山陽號前往倉敷車站。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=倉敷車站" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-time">16:00-18:00</span> <span class="attraction-name">倉敷美觀地區 🏞️</span>
-                    <p class="attraction-desc">漫步在江戶時代的古老街道，感受小橋流水人家的獨特魅力，傍晚時分尤其美麗。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">倉敷美觀地區 🏞️</button>
+                <div class="accordion-content">
+                    <p>漫步在江戶時代的古老街道，感受小橋流水人家的獨特魅力，傍晚時分尤其美麗。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=倉敷美觀地區" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-time">18:00-19:00</span> <span class="attraction-name">晚餐：豬排飯 🍛</span>
-                    <p class="attraction-desc">晚餐時間，可以考慮品嚐美味的日式豬排飯，滿足旅途中的味蕾。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">晚餐：豬排飯 🍛</button>
+                <div class="accordion-content">
+                    <p>晚餐時間，可以考慮品嚐美味的日式豬排飯，滿足旅途中的味蕾。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=倉敷美觀地區+豬排飯" target="_blank" class="nav-button">🔍 尋找附近餐廳</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-time">19:00-22:00</span> <span class="attraction-name">倉敷三井Outlet 🛍️</span>
-                    <p class="attraction-desc">盡情享受購物的樂趣，在這裡尋找各種知名品牌的超值折扣商品。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">倉敷三井Outlet 🛍️</button>
+                <div class="accordion-content">
+                    <p>盡情享受購物的樂趣，在這裡尋找各種知名品牌的超值折扣商品。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=三井アウトレットパーク+倉敷" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="accommodation">
-                    <span class="attraction-name">🏨 住宿：天然溫泉 阿智之湯 多美迎倉敷</span>
-                    <p class="attraction-desc">結束一天行程後，回到飯店享受溫泉與宵夜拉麵，洗去一身的疲憊。🍜♨️</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=天然溫泉+阿智之湯+多美迎倉敷" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-            </ul>
+                </div>
+            </div>
+            <div class="accommodation">
+                <button class="accordion-header">🏨 住宿：天然溫泉 阿智之湯 多美迎倉敷</button>
+                <p>結束一天行程後，回到飯店享受溫泉與宵夜拉麵，洗去一身的疲憊。🍜♨️</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=天然溫泉+阿智之湯+多美迎倉敷" target="_blank" class="nav-button">📍 導航到此</a>
+            </div>
         </div>
 
+        <!-- Other Days Content (similar structure) -->
         <!-- Day 2 Content -->
         <div id="day2" class="day-content">
             <div class="day-header">
                 <h2>2/7 (六)</h2><span class="day-title">岡山之旅 🍑</span>
             </div>
-            <ul class="attraction-list">
-                <li class="attraction-item">
-                    <span class="attraction-name">岡山城 🏯</span>
-                    <p class="attraction-desc">探索這座被稱為「烏城」的黑色城堡，登上天守閣俯瞰市景與周邊風光。</p>
+            <div class="accordion-item">
+                <button class="accordion-header">岡山城 🏯</button>
+                <div class="accordion-content">
+                    <p>探索這座被稱為「烏城」的黑色城堡，登上天守閣俯瞰市景與周邊風光。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=岡山城" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-name">後樂園 🌳</span>
-                    <p class="attraction-desc">欣賞日本三大名園之一的精緻景觀，在廣闊的庭園中感受四季變換的美麗。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">後樂園 🌳</button>
+                <div class="accordion-content">
+                    <p>欣賞日本三大名園之一的精緻景觀，在廣闊的庭園中感受四季變換的美麗。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=後樂園" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-name">吉備津神社 ⛩️</span>
-                    <p class="attraction-desc">走過長達360公尺的宏偉迴廊，感受桃太郎傳說發源地的神秘氛圍。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">吉備津神社 ⛩️</button>
+                <div class="accordion-content">
+                    <p>走過長達360公尺的宏偉迴廊，感受桃太郎傳說發源地的神秘氛圍。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=吉備津神社" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                 <li class="attraction-item">
-                    <span class="attraction-name">岡山美食與伴手禮 😋🎁</span>
-                    <p class="attraction-desc">品嚐岡山當地特色美食，並選購一些精緻的伴手禮作為旅行的紀念。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">岡山美食與伴手禮 😋🎁</button>
+                <div class="accordion-content">
+                    <p>品嚐岡山當地特色美食，並選購一些精緻的伴手禮作為旅行的紀念。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=岡山車站+美食" target="_blank" class="nav-button">🔍 尋找附近店家</a>
-                </li>
-                <li class="accommodation">
-                    <span class="attraction-name">🏨 住宿：天然溫泉 阿智之湯 多美迎倉敷</span>
-                    <p class="attraction-desc">結束一天行程後，回到飯店享受溫泉與宵夜拉麵，洗去一身的疲憊。🍜♨️</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=天然溫泉+阿智之湯+多美迎倉敷" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-            </ul>
+                </div>
+            </div>
+            <div class="accommodation">
+                <button class="accordion-header">🏨 住宿：天然溫泉 阿智之湯 多美迎倉敷</button>
+                <p>結束一天行程後，回到飯店享受溫泉與宵夜拉麵，洗去一身的疲憊。🍜♨️</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=天然溫泉+阿智之湯+多美迎倉敷" target="_blank" class="nav-button">📍 導航到此</a>
+            </div>
         </div>
-
-        <!-- Day 3 Content -->
+        
+        <!-- Day 3 to 6 similarly structured -->
         <div id="day3" class="day-content">
             <div class="day-header">
                 <h2>2/8 (日)</h2><span class="day-title">廣島 & 嚴島 🦌</span>
             </div>
-            <ul class="attraction-list">
-                <li class="attraction-item">
-                    <span class="attraction-time">07:00-</span> <span class="attraction-name">廣島 & 嚴島 (宮島) ⛩️</span>
-                    <p class="attraction-desc">參觀海上朱紅色的「嚴島神社大鳥居」，與島上可愛的梅花鹿近距離接觸。</p>
+            <div class="accordion-item">
+                <button class="accordion-header">廣島 & 嚴島 (宮島) ⛩️</button>
+                <div class="accordion-content">
+                    <p>參觀海上朱紅色的「嚴島神社大鳥居」，與島上可愛的梅花鹿近距離接觸。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=嚴島神社" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-name">品嚐牡蠣大餐 🦪</span>
-                    <p class="attraction-desc">來到廣島絕對不能錯過！享用新鮮肥美的烤牡蠣、炸牡蠣等各種牡蠣料理。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">品嚐牡蠣大餐 🦪</button>
+                <div class="accordion-content">
+                    <p>來到廣島絕對不能錯過！享用新鮮肥美的烤牡蠣、炸牡蠣等各種牡蠣料理。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=宮島+牡蠣" target="_blank" class="nav-button">🔍 尋找附近餐廳</a>
-                </li>
-                <li class="accommodation">
-                    <span class="attraction-name">🏨 住宿：天然溫泉 阿智之湯 多美迎倉敷</span>
-                    <p class="attraction-desc">結束一天行程後，回到飯店享受溫泉與宵夜拉麵，洗去一身的疲憊。🍜♨️</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=天然溫泉+阿智之湯+多美迎倉敷" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-            </ul>
+                </div>
+            </div>
+            <div class="accommodation">
+                <button class="accordion-header">🏨 住宿：天然溫泉 阿智之湯 多美迎倉敷</button>
+                <p>結束一天行程後，回到飯店享受溫泉與宵夜拉麵，洗去一身的疲憊。🍜♨️</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=天然溫泉+阿智之湯+多美迎倉敷" target="_blank" class="nav-button">📍 導航到此</a>
+            </div>
         </div>
 
-        <!-- Day 4 Content -->
         <div id="day4" class="day-content">
             <div class="day-header">
                 <h2>2/9 (一)</h2><span class="day-title">倉敷美觀 🛶</span>
             </div>
-            <ul class="attraction-list">
-                <li class="attraction-item">
-                    <span class="attraction-time">08:00-12:00</span> <span class="attraction-name">白天遊倉敷 & 坐船 🛶</span>
-                    <p class="attraction-desc">白天再次感受倉敷的魅力，可以體驗搭乘小船遊覽運河，享受悠閒時光。</p>
+            <div class="accordion-item">
+                <button class="accordion-header">白天遊倉敷 & 坐船 🛶</button>
+                <div class="accordion-content">
+                    <p>白天再次感受倉敷的魅力，可以體驗搭乘小船遊覽運河，享受悠閒時光。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=倉敷美觀地區" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-name">牛仔褲街 👖</span>
-                    <p class="attraction-desc">這裡是日本國產牛仔褲的發源地，街道上充滿丹寧元素，適合尋寶挖酷。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">牛仔褲街 👖</button>
+                <div class="accordion-content">
+                    <p>這裡是日本國產牛仔褲的發源地，街道上充滿丹寧元素，適合尋寶挖酷。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=兒島牛仔褲街" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-name">阿智神社 🙏</span>
-                    <p class="attraction-desc">倉敷美觀地區的古老神社，是個祈求學業進步與智慧的寧靜之地。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">阿智神社 🙏</button>
+                <div class="accordion-content">
+                    <p>倉敷美觀地區的古老神社，是個祈求學業進步與智慧的寧靜之地。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=阿智神社" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="accommodation">
-                    <span class="attraction-name">🏨 住宿：京都四條烏丸佳閣酒店</span>
-                    <p class="attraction-desc">移動至京都，入住新飯店，準備開始京都的行程。</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=京都四條烏丸佳閣酒店" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-            </ul>
+                </div>
+            </div>
+            <div class="accommodation">
+                <button class="accordion-header">🏨 住宿：京都四條烏丸佳閣酒店</button>
+                <p>移動至京都，入住新飯店，準備開始京都的行程。</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=京都四條烏丸佳閣酒店" target="_blank" class="nav-button">📍 導航到此</a>
+            </div>
         </div>
 
-        <!-- Day 5 Content -->
         <div id="day5" class="day-content">
             <div class="day-header">
                 <h2>2/10 (二)</h2><span class="day-title">京都吃吃喝喝 🍵</span>
             </div>
-            <ul class="attraction-list">
-                <li class="attraction-item">
-                    <span class="attraction-time">13:30 / 14:00</span> <span class="attraction-name">空禪亭 豬排飯 🍖</span>
-                    <p class="attraction-desc">品嚐外酥內嫩的極品豬排飯，享受京都道地的美味料理。(<span class="note">時間可調整</span>)</p>
+            <div class="accordion-item">
+                <button class="accordion-header">空禪亭 豬排飯 🍖</button>
+                <div class="accordion-content">
+                    <p>品嚐外酥內嫩的極品豬排飯，享受京都道地的美味料理。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=空蟬亭" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-name">晚餐：野菜居酒屋 🥬🍻</span>
-                    <p class="attraction-desc">晚上體驗日式居酒屋文化，品嚐以新鮮蔬菜為主題的特色創意料理。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">晚餐：野菜居酒屋 🥬🍻</button>
+                <div class="accordion-content">
+                    <p>晚上體驗日式居酒屋文化，品嚐以新鮮蔬菜為主題的特色創意料理。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=京都+野菜居酒屋" target="_blank" class="nav-button">🔍 尋找附近餐廳</a>
-                </li>
-                <li class="accommodation">
-                    <span class="attraction-name">🏨 住宿：京都四條烏丸佳閣酒店</span>
-                    <p class="attraction-desc">在京都的夜晚，享受美食後回到舒適的飯店休息。</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=京都四條烏丸佳閣酒店" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-            </ul>
+                </div>
+            </div>
+            <div class="accommodation">
+                <button class="accordion-header">🏨 住宿：京都四條烏丸佳閣酒店</button>
+                <p>在京都的夜晚，享受美食後回到舒適的飯店休息。</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=京都四條烏丸佳閣酒店" target="_blank" class="nav-button">📍 導航到此</a>
+            </div>
         </div>
 
-        <!-- Day 6 Content -->
         <div id="day6" class="day-content">
             <div class="day-header">
                 <h2>2/11 (三)</h2><span class="day-title">奈良 & 宇治 🦌🍵</span>
             </div>
-            <ul class="attraction-list">
-                <li class="attraction-item">
-                    <span class="attraction-time">08:00-14:00</span> <span class="attraction-name">奈良：東大寺 & 餵鹿 🦌</span>
-                    <p class="attraction-desc">參拜世界最大的木造建築，並在奈良公園與可愛的鹿群互動、餵食鹿仙貝。</p>
+            <div class="accordion-item">
+                <button class="accordion-header">奈良：東大寺 & 餵鹿 🦌</button>
+                <div class="accordion-content">
+                    <p>參拜世界最大的木造建築，並在奈良公園與可愛的鹿群互動、餵食鹿仙貝。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=東大寺" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-name">宇治：平等院 🏛️</span>
-                    <p class="attraction-desc">欣賞日幣十元硬幣上的鳳凰堂，感受平安時代貴族文化的極致美學。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">宇治：平等院 🏛️</button>
+                <div class="accordion-content">
+                    <p>欣賞日幣十元硬幣上的鳳凰堂，感受平安時代貴族文化的極致美學。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=平等院" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-name">宇治：抹茶冰 & 宇治神社 🍧</span>
-                    <p class="attraction-desc">品嚐道地的濃郁抹茶冰，再到宇治神社感受歷史悠久的寧靜氛圍。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">宇治：抹茶冰 & 宇治神社 🍧</button>
+                <div class="accordion-content">
+                    <p>品嚐道地的濃郁抹茶冰，再到宇治神社感受歷史悠久的寧靜氛圍。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=宇治神社" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="accommodation">
-                    <span class="attraction-name">🏨 住宿：京都四條烏丸佳閣酒店</span>
-                    <p class="attraction-desc">結束奈良與宇治的一日遊，返回京都的飯店休息。</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=京都四條烏丸佳閣酒店" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-            </ul>
+                </div>
+            </div>
+            <div class="accommodation">
+                <button class="accordion-header">🏨 住宿：京都四條烏丸佳閣酒店</button>
+                <p>結束奈良與宇治的一日遊，返回京都的飯店休息。</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=京都四條烏丸佳閣酒店" target="_blank" class="nav-button">📍 導航到此</a>
+            </div>
         </div>
 
         <!-- Day 7 Content -->
@@ -374,38 +423,70 @@
             <div class="day-header">
                 <h2>2/12 (四)</h2><span class="day-title">離開當天 ✨</span>
             </div>
-            <ul class="attraction-list">
-                <li class="attraction-item">
-                    <span class="attraction-time">07:30-10:00</span> <span class="attraction-name">金閣寺 ✨</span>
-                    <p class="attraction-desc">欣賞貼滿金箔的舍利殿，在池面倒影中看見絕美的金色殿堂，感受其輝煌。</p>
+            <div class="accordion-item">
+                <button class="accordion-header">金閣寺 ✨</button>
+                <div class="accordion-content">
+                    <p>欣賞貼滿金箔的舍利殿，在池面倒影中看見絕美的金色殿堂，感受其輝煌。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=金閣寺" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-name">御金神社 💰</span>
-                    <p class="attraction-desc">祈求財運亨通的熱門神社，金光閃閃的鳥居是其最大特色，非常特別。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">御金神社 💰</button>
+                <div class="accordion-content">
+                    <p>祈求財運亨通的熱門神社，金光閃閃的鳥居是其最大特色，非常特別。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=御金神社" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-                <li class="attraction-item">
-                    <span class="attraction-time">12:00-18:30</span> <span class="attraction-name">前往機場 & 返程 🏠</span>
-                    <p class="attraction-desc">整理行囊，前往關西國際機場，搭機返回溫暖的家，結束愉快的旅程。</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">前往機場 & 返程 (航班 CX565) 🏠</button>
+                <div class="accordion-content">
+                    <p>整理行囊，前往關西國際機場，搭機返回溫暖的家，結束愉快的旅程。</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=關西國際機場" target="_blank" class="nav-button">📍 導航到此</a>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
-
     </div>
 
+    <button id="backToTopBtn" title="回到頂部">🔼</button>
+
     <script>
+        // Tab switching logic
         function showDay(dayId) {
-            document.querySelectorAll('.day-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
+            document.querySelectorAll('.day-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
             document.getElementById(dayId).classList.add('active');
             document.querySelector(`.tab-button[onclick="showDay('${dayId}')"]`).classList.add('active');
         }
+
+        // Accordion logic
+        document.querySelectorAll('.accordion-header').forEach(button => {
+            if (!button.closest('.accommodation')) { // Exclude accommodation header from accordion behavior
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active');
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        content.style.padding = "0 15px";
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        content.style.padding = "10px 15px";
+                    }
+                });
+            }
+        });
+
+        // Back to Top button logic
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        };
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
     </script>
 
 </body>
