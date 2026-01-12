@@ -3,149 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 Feb. Japan Journey</title>
+    <title>2026 Feb. Journey</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #fcfcfc;
-            --text-main: #2c2c2c;
-            --text-sub: #757575;
-            --accent: #8e7e6a; /* 雅緻大地色 */
-            --card-bg: #ffffff;
-            --transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+            --bg: #fdfdfd;
+            --text: #1a1a1a;
+            --sub-text: #666;
+            --accent: #8e7e6a;
+            --light-bg: #f9f9f9;
+            --bezier: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
             font-family: 'Noto Serif TC', serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px 15px;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0; padding: 25px 20px;
             line-height: 1.8;
             -webkit-font-smoothing: antialiased;
         }
 
-        .container { max-width: 500px; margin: 0 auto; }
+        .container { max-width: 550px; margin: 0 auto; }
 
-        header { margin-bottom: 35px; }
-        h1 { font-size: 1.6rem; letter-spacing: 3px; font-weight: 700; margin: 0; }
-        
-        /* 氣象區塊 */
-        .weather-bar {
-            font-size: 0.85rem;
-            color: var(--accent);
-            margin-top: 10px;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        /* Header & Weather */
+        header { margin-bottom: 40px; }
+        h1 { font-size: 1.7rem; letter-spacing: 4px; font-weight: 700; margin: 0; text-align: left; }
+        .weather-info { 
+            font-size: 0.85rem; color: var(--accent); margin-top: 12px; 
+            letter-spacing: 1px; display: flex; align-items: center; gap: 8px;
         }
 
-        /* 橫向滑動天數選單 */
+        /* Tab Navigation (Smooth Sliding) */
         .tab-wrapper {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 10px 0;
-            margin-bottom: 30px;
-            scrollbar-width: none;
+            display: flex; overflow-x: auto; gap: 25px;
+            padding: 15px 0; margin-bottom: 35px;
+            scrollbar-width: none; border-bottom: 1px solid #eee;
         }
         .tab-wrapper::-webkit-scrollbar { display: none; }
 
         .tab-btn {
-            flex: 0 0 auto;
-            background: none;
-            border: none;
-            padding: 5px 0;
-            font-family: inherit;
-            font-size: 0.95rem;
-            color: var(--text-sub);
-            cursor: pointer;
-            transition: var(--transition);
+            flex: 0 0 auto; background: none; border: none; padding: 8px 0;
+            font-family: inherit; font-size: 0.95rem; color: var(--sub-text);
+            cursor: pointer; transition: all 0.4s var(--bezier);
             border-bottom: 1.5px solid transparent;
         }
-        .tab-btn.active {
-            color: var(--text-main);
-            border-bottom: 1.5px solid var(--accent);
-            font-weight: 700;
-            transform: translateY(-2px);
+        .tab-btn.active { 
+            color: var(--text); border-bottom: 1.5px solid var(--accent); 
+            font-weight: 700; transform: translateY(-2px); 
         }
 
-        /* 行程內容 */
-        .day-content { display: none; animation: slideIn 0.6s ease forwards; }
+        /* Itinerary Content */
+        .day-content { display: none; animation: fadeIn 0.7s var(--bezier) forwards; }
         .day-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(10px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .accordion-item {
-            border-bottom: 1px solid #eeeeee;
-            margin-bottom: 5px;
-        }
+        .accordion-item { border-bottom: 1px solid #f0f0f0; }
         .accordion-header {
-            width: 100%;
-            padding: 22px 5px;
-            display: flex;
-            justify-content: space-between;
-            background: none;
-            border: none;
-            font-family: inherit;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: var(--transition);
+            width: 100%; padding: 25px 0; display: flex; justify-content: space-between;
+            background: none; border: none; font-family: inherit; font-size: 1.15rem;
+            cursor: pointer; text-align: left; transition: opacity 0.3s;
         }
-        .accordion-header:active { background-color: #f9f9f9; }
-        
-        .arrow { font-size: 0.7rem; color: var(--accent); transition: transform 0.4s; }
+        .accordion-header:active { opacity: 0.5; }
+        .arrow { font-size: 0.7rem; color: var(--accent); transition: transform 0.4s var(--bezier); }
         .accordion-header.active .arrow { transform: rotate(180deg); }
 
-        .accordion-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 0 5px;
+        .accordion-body { 
+            max-height: 0; overflow: hidden; 
+            transition: max-height 0.6s var(--bezier); padding-bottom: 0;
         }
-        .description { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 15px; }
+        .inner-content { padding-bottom: 25px; }
+        .description { font-size: 0.95rem; color: var(--sub-text); margin-bottom: 15px; }
 
+        /* Buttons & Tags */
         .nav-link {
-            display: inline-block;
-            text-decoration: none;
-            color: var(--accent);
-            font-size: 0.8rem;
-            border: 1px solid var(--accent);
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            transition: var(--transition);
+            display: inline-flex; align-items: center; text-decoration: none;
+            color: var(--accent); font-size: 0.85rem; border: 1px solid var(--accent);
+            padding: 5px 15px; border-radius: 25px; transition: all 0.3s;
         }
         .nav-link:active { background: var(--accent); color: white; }
+        
+        .tag { font-size: 0.75rem; background: #f0f0f0; padding: 2px 10px; border-radius: 4px; margin-left: 10px; font-weight: 400; color: #555; }
+        .memo { font-size: 0.85rem; color: #b45309; font-weight: 700; margin-top: 10px; background: #fffbeb; padding: 10px; border-radius: 6px; }
 
-        .flight-tag {
-            font-size: 0.75rem;
-            background: #f0f0f0;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-left: 10px;
-            font-weight: 400;
+        /* Stay Box */
+        .stay-section {
+            margin-top: 40px; padding: 25px; background: var(--light-bg);
+            border-radius: 8px; border-left: 3px solid var(--accent);
         }
-
-        .stay-box {
-            margin-top: 35px;
-            padding: 20px;
-            background: #f9f9f9;
-            font-size: 0.9rem;
-            border-left: 2px solid var(--accent);
-        }
+        .stay-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; display: block; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>2026 Japan Trip</h1>
-        <div id="weatherDisplay" class="weather-bar">📍 讀取日本氣象中...</div>
+        <h1>2026 Japan Itinerary</h1>
+        <div id="weatherDisplay" class="weather-info">📍 正在連接日本氣象廳...</div>
     </header>
 
     <div class="tab-wrapper">
@@ -161,87 +115,144 @@
     <div id="day1" class="day-content active">
         <div class="accordion-item">
             <button class="accordion-header">BR132 航班資訊 <span class="arrow">▼</span></button>
-            <div class="accordion-body">
-                <p class="description">搭乘長榮航空前往關西，開啟期待已久的家庭旅程，準備迎接關西的冬日氣息。</p>
-                <span class="flight-tag">TPE 08:20 - KIX 11:55</span>
-            </div>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">從桃園出發，開啟期待已久的家庭旅程。抵達關西後搭乘 Haruka 與山陽新幹線前往倉敷。</p>
+                <span class="tag">TPE 08:20 - KIX 11:55</span>
+            </div></div>
         </div>
         <div class="accordion-item">
             <button class="accordion-header">倉敷美觀地區 <span class="arrow">▼</span></button>
-            <div class="accordion-body">
-                <p class="description">漫步於江戶時代的運河邊，欣賞白壁宅邸與垂柳倒影，感受時光倒流的靜謐優雅。</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=淺草寺雷門8" class="nav-link">開啟導航</a>
-            </div>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">漫步於江戶時代運河邊，欣賞白壁宅邸與垂柳倒影。傍晚點燈景色絕美，適合慢慢散步。</p>
+                <div class="memo">💡 小阿姨想吃豬排飯；22:00 逛 Outlet。</div>
+                <a href="https://www.google.com/maps/search/?api=1&query=倉敷美觀地區" class="nav-link">📍 開啟景點導航</a>
+            </div></div>
         </div>
-        <div class="stay-box">🏠 住宿：天然溫泉 阿智之湯 多美迎倉敷</div>
+        <div class="stay-section">
+            <span class="stay-title">🏠 住宿：天然溫泉 阿智之湯 多美迎倉敷</span>
+            <p class="description">享受 Dormy Inn 著名的溫泉與夜鳴拉麵。</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Dormy+Inn+倉敷" class="nav-link">📍 導航至飯店</a>
+        </div>
     </div>
 
     <div id="day2" class="day-content">
         <div class="accordion-item">
             <button class="accordion-header">岡山城 & 後樂園 <span class="arrow">▼</span></button>
-            <div class="accordion-body">
-                <p class="description">走訪壯麗的烏城與日本三大名園，在廣闊庭園中領略四季遞嬗與晴天之國的風采。</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=岡山城" class="nav-link">開啟導航</a>
-            </div>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">走訪壯麗的烏城與日本三大名園，在廣闊庭園中領略「晴天之國」的優雅風采。</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=岡山後樂園" class="nav-link">📍 開啟導航</a>
+            </div></div>
         </div>
         <div class="accordion-item">
             <button class="accordion-header">吉備津神社 <span class="arrow">▼</span></button>
-            <div class="accordion-body">
-                <p class="description">穿越長達三百六十公尺的神祕長廊，細品桃太郎傳說的發源地與宏偉的神社建築。</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=吉備津神社" class="nav-link">開啟導航</a>
-            </div>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">穿越長達 360 公尺的宏偉木造長廊，細品桃太郎傳說發源地的歷史底蘊。</p>
+                <div class="memo">🎁 推薦：購買岡山特色伴手禮。</div>
+                <a href="https://www.google.com/maps/search/?api=1&query=吉備津神社" class="nav-link">📍 開啟導航</a>
+            </div></div>
         </div>
-        <div class="stay-box">🏠 住宿：多美迎倉敷 (Dormy Inn)</div>
+        <div class="stay-section">
+            <span class="stay-title">🏠 住宿：多美迎倉敷 (Dormy Inn)</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Dormy+Inn+倉敷" class="nav-link">📍 飯店位置</a>
+        </div>
     </div>
 
     <div id="day3" class="day-content">
         <div class="accordion-item">
-            <button class="accordion-header">宮島 嚴島神社 <span class="arrow">▼</span></button>
-            <div class="accordion-body">
-                <p class="description">朝聖著名的海上朱紅大鳥居，與野生小鹿相遇，沉浸在海天一色的神聖氛圍中。</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=嚴島神社" class="nav-link">開啟導航</a>
-            </div>
+            <button class="accordion-header">嚴島神社 (宮島) <span class="arrow">▼</span></button>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">朝聖海上大鳥居，與野生小鹿互動。沉浸在世界遺產的神聖氛圍與海天一色的美景中。</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=嚴島神社" class="nav-link">📍 開啟導航</a>
+            </div></div>
         </div>
         <div class="accordion-item">
-            <button class="accordion-header">廣島牡蠣饗宴 <span class="arrow">▼</span></button>
-            <div class="accordion-body">
-                <p class="description">大快朵頤肥美鮮甜的廣島名產牡蠣，品嚐最道地的海洋珍味，滿足旅程中的胃袋。</p>
-            </div>
+            <button class="accordion-header">廣島美食饗宴 <span class="arrow">▼</span></button>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">大快朵頤肥美鮮甜的廣島牡蠣。無論是烤、炸或火鍋，都是來到廣島不可錯過的美味。</p>
+                <div class="memo">🦪 重點：牡蠣、牡蠣、牡蠣！</div>
+            </div></div>
         </div>
-        <div class="stay-box">🏠 住宿：多美迎倉敷 (Dormy Inn)</div>
+        <div class="stay-section">
+            <span class="stay-title">🏠 住宿：多美迎倉敷 (Dormy Inn)</span>
+        </div>
+    </div>
+
+    <div id="day4" class="day-content">
+        <div class="accordion-item">
+            <button class="accordion-header">日間倉敷 & 乘船 <span class="arrow">▼</span></button>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">白天再次感受倉敷之美，體驗乘船遊覽運河。隨後準備移動前往古都京都。</p>
+                <div class="memo">💡 途中備選：姬路城或補逛 Outlet。</div>
+            </div></div>
+        </div>
+        <div class="stay-section">
+            <span class="stay-title">🏠 住宿：京都四條烏丸佳閣酒店</span>
+            <p class="description">位於京都核心地帶，交通與購物皆極為便利。</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=京都四條烏丸佳閣酒店" class="nav-link">📍 飯店導航</a>
+        </div>
     </div>
 
     <div id="day5" class="day-content">
         <div class="accordion-item">
             <button class="accordion-header">空禪亭 豬排飯 <span class="arrow">▼</span></button>
-            <div class="accordion-body">
-                <p class="description">探訪京都職人級的炸豬排飯，品嚐外酥內嫩的極致口感，享受屬於京都的味覺美學。</p>
-                <span class="flight-tag">預約時間：13:30 / 14:00</span>
-            </div>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">探訪京都職人級炸豬排，品嚐外酥內嫩的驚艷口感。這是京都最難預約的美味之一。</p>
+                <div class="memo">📌 預約：13:30 (4位) / 14:00 (2位)</div>
+                <a href="https://www.google.com/maps/search/?api=1&query=空禪亭" class="nav-link">📍 餐廳位置</a>
+            </div></div>
         </div>
-        <div class="stay-box">🏠 住宿：京都四條烏丸佳閣酒店</div>
+        <div class="accordion-item">
+            <button class="accordion-header">晚餐：野菜居酒屋 <span class="arrow">▼</span></button>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">體驗日式居酒屋文化，享用當季新鮮野菜料理與當地清酒，感受放鬆的京都之夜。</p>
+            </div></div>
+        </div>
+        <div class="stay-section">
+            <span class="stay-title">🏠 住宿：京都四條烏丸佳閣酒店</span>
+        </div>
+    </div>
+
+    <div id="day6" class="day-content">
+        <div class="accordion-item">
+            <button class="accordion-header">奈良：餵鹿與東大寺 <span class="arrow">▼</span></button>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">在奈良公園與可愛鹿群互動，參拜壯觀的東大寺大佛。隨後前往宇治享受抹茶時光。</p>
+                <div class="memo">🍓 重點：採草莓、東大寺、餵鹿。</div>
+                <a href="https://www.google.com/maps/search/?api=1&query=東大寺" class="nav-link">📍 開啟導航</a>
+            </div></div>
+        </div>
+        <div class="accordion-item">
+            <button class="accordion-header">宇治：平等院與抹茶 <span class="arrow">▼</span></button>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">拜訪日幣十元硬幣上的鳳凰堂，品嚐世界頂級抹茶冰淇淋，走訪寧靜的宇治神社。</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=平等院" class="nav-link">📍 開啟導航</a>
+            </div></div>
+        </div>
+        <div class="stay-section">
+            <span class="stay-title">🏠 住宿：京都四條烏丸佳閣酒店</span>
+        </div>
     </div>
 
     <div id="day7" class="day-content">
         <div class="accordion-item">
             <button class="accordion-header">金閣寺 & 御金神社 <span class="arrow">▼</span></button>
-            <div class="accordion-body">
-                <p class="description">拜訪金箔閃耀的舍利殿與求財聖地，在閃耀的金色光芒中為旅程畫下完美的句點。</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=金閣寺" class="nav-link">開啟導航</a>
-            </div>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">早起拜訪金箔閃耀的舍利殿與求財聖地。在閃耀的金色光芒中為旅程畫下句點。</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=金閣寺" class="nav-link">📍 開啟導航</a>
+            </div></div>
         </div>
         <div class="accordion-item">
             <button class="accordion-header">CX565 返程航班 <span class="arrow">▼</span></button>
-            <div class="accordion-body">
-                <p class="description">帶著滿滿的回憶與伴手禮，搭乘國泰航空平安返家，期待下一次的家庭冒險之旅。</p>
-                <span class="flight-tag">KIX 16:15 - TPE 18:30</span>
-            </div>
+            <div class="accordion-body"><div class="inner-content">
+                <p class="description">帶著滿滿回憶與戰利品前往機場。準備搭機回台，期待下一次的冒險。</p>
+                <span class="tag">KIX 16:15 - TPE 18:30</span>
+            </div></div>
         </div>
     </div>
 </div>
 
 <script>
-    // 氣象連動邏輯
+    // 氣象連動邏輯 (JMA API)
     async function getWeather(code) {
         const bar = document.getElementById('weatherDisplay');
         try {
@@ -252,8 +263,9 @@
             let emo = "☁️";
             if(text.includes("晴")) emo = "☀️";
             if(text.includes("雨")) emo = "🌧️";
-            bar.innerHTML = `📍 ${forecast.area.name} 預報：${emo} ${text}`;
-        } catch(e) { bar.innerText = "📍 氣象數據暫時無法載入"; }
+            if(text.includes("雪")) emo = "❄️";
+            bar.innerHTML = `<span>📍 ${forecast.area.name} 預報：${emo} ${text}</span>`;
+        } catch(e) { bar.innerText = "📍 氣象數據載入中..."; }
     }
 
     // 天數切換
@@ -263,9 +275,10 @@
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         event.target.classList.add('active');
         getWeather(code);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 手風琴邏輯
+    // 手風琴摺疊邏輯
     document.querySelectorAll('.accordion-header').forEach(h => {
         h.onclick = () => {
             h.classList.toggle('active');
@@ -274,10 +287,9 @@
         };
     });
 
-    // 初始化
+    // 初始化：預設顯示第一天與倉敷氣象
     window.onload = () => getWeather('330000');
 </script>
 
 </body>
 </html>
-
