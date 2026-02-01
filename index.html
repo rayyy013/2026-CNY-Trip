@@ -29,14 +29,12 @@
         header { text-align: center; margin-bottom: 25px; border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
         h1 { font-size: 1.5rem; color: #2c3e50; margin: 0; letter-spacing: 2px; }
 
-        /* 天氣區塊 */
         #weather-box {
             background: var(--bg-light); padding: 12px; border-radius: 12px;
             text-align: center; font-size: 0.9rem; margin-bottom: 20px;
             color: var(--secondary); font-weight: bold;
         }
 
-        /* 橫滑天數按鈕 */
         .tab-wrapper {
             display: flex; overflow-x: auto; gap: 8px;
             padding-bottom: 15px; scrollbar-width: none;
@@ -50,12 +48,10 @@
         }
         .tab-btn.active { background: var(--primary); color: var(--white); border-color: var(--primary); transform: scale(1.05); }
 
-        /* 行程內容 */
         .day-content { display: none; animation: slideIn 0.5s ease; }
         .day-content.active { display: block; }
         @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 摺疊拉頁 */
         .item { border-bottom: 1px solid #eee; }
         .item-header {
             width: 100%; padding: 18px 5px; display: flex; justify-content: space-between;
@@ -70,7 +66,6 @@
 
         .description { margin-bottom: 12px; font-size: 0.9rem; color: #666; }
 
-        /* 按鈕樣式 */
         .btn {
             display: inline-block; padding: 6px 15px; border-radius: 20px;
             text-decoration: none; font-size: 0.85rem; margin-top: 5px;
@@ -109,46 +104,55 @@
 
     <div id="day1" class="day-content active">
         <div class="item">
-            <button class="item-header">BR132 航班資訊 ✈️ <span class="arrow">▼</span></button>
+            <button class="item-header">BR132 航班追蹤 (08:20) ✈️ <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">長榮航空往關西首選，提供舒適飛行體驗。08:20 桃園起飛，預計 11:55 抵達日本。</p>
-                <a href="https://www.flightradar24.com/data/flights/br132" target="_blank" class="btn btn-flight">✈️ 查看即時狀態</a>
+                <p class="description">長榮航空 TPE ✈️ KIX。預計 11:55 抵達關西機場，請先前往 JR 綠色窗口兌換票券。</p>
+                <a href="https://www.flightradar24.com/data/flights/br132" target="_blank" class="btn btn-flight">✈️ 即時航班狀態</a>
             </div></div>
         </div>
         <div class="item">
-            <button class="item-header">倉敷美觀地區 🏞️ <span class="arrow">▼</span></button>
+            <button class="item-header">機場交通：KIX → 倉敷 🚆 <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">江戶風情白壁建築與運河交織，傍晚點燈後氣氛極佳。漫步老街感受大正浪漫氛圍。</p>
-                <a href="https://maps.app.goo.gl/1rx4sVYq7CgzeVcp7" target="_blank" class="btn btn-nav">📍 開啟地圖導航</a>
+                <p class="description">13:00 出發。搭乘 Haruka 至新大阪站，轉乘山陽新幹線前往岡山，再轉區間車至倉敷。</p>
+                <a href="https://maps.app.goo.gl/kXv7S6uP3K8T8G9f8" target="_blank" class="btn btn-nav">📍 關西機場位置</a>
+                <a href="https://maps.app.goo.gl/U6W7rXyP8K8T8G9f8" target="_blank" class="btn btn-nav">📍 倉敷車站位置</a>
             </div></div>
         </div>
         <div class="item">
-            <button class="item-header">梅之木味噌豬排 🍛 <span class="arrow">▼</span></button>
+            <button class="item-header">倉敷美觀地區 🌸 <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">在地超人氣老店，獨門味噌醬汁配上酥脆厚切豬排一絕。建議提前候位以免久候。</p>
-                <a href="https://www.google.com/maps/search/梅之木味噌豬排+倉敷" target="_blank" class="btn btn-nav">🍴 餐廳導航</a>
+                <p class="description">傍晚時分的美觀地區光線柔和。漫步古老街道，感受江戶時代遺留下來的歷史美感與靜謐。</p>
+                <div class="memo">🍽️ 晚餐：梅之木味噌豬排飯；22:00 逛 Outlet。</div>
+                <a href="https://maps.app.goo.gl/8K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 美觀地區導航</a>
             </div></div>
         </div>
         <div class="stay">
             <strong>🏨 住宿：多美迎倉敷 (Dormy Inn)</strong>
-            <p class="description">天然溫泉阿智之湯。半夜提供免費拉麵宵夜，入住後記得換浴衣去泡湯解乏。</p>
-            <a href="https://maps.app.goo.gl/1rx4sVYq7CgzeVcp7" target="_blank" class="btn btn-nav">📍 飯店位置</a>
+            <p class="description">天然溫泉阿智之湯。晚上別忘了享用飯店免費提供的夜鳴拉麵宵夜。</p>
+            <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 飯店位置</a>
         </div>
     </div>
 
     <div id="day2" class="day-content">
         <div class="item">
-            <button class="item-header">岡山城 & 後樂園 🏯 <span class="arrow">▼</span></button>
+            <button class="item-header">岡山城 (烏城) 🏯 <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">雄偉烏城與日本三大名園，體驗傳統庭園造景之美。從天守閣俯瞰市景十分壯觀。</p>
-                <a href="https://www.google.com/maps/search/岡山城" target="_blank" class="btn btn-nav">📍 地圖導航</a>
+                <p class="description">外牆漆黑如烏鴉羽毛般莊嚴。登頂可俯瞰旭川與整座城市的景致，是岡山的歷史象徵。</p>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 岡山城導航</a>
+            </div></div>
+        </div>
+        <div class="item">
+            <button class="item-header">岡山後樂園 🌳 <span class="arrow">▼</span></button>
+            <div class="item-body"><div class="inner">
+                <p class="description">日本三大名園之一，以「延養亭」為中心，展現出四季各異的大名庭園美學，景致迷人。</p>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 後樂園導航</a>
             </div></div>
         </div>
         <div class="item">
             <button class="item-header">吉備津神社 ⛩️ <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">擁有壯觀360公尺木造長廊，是桃太郎傳說的起源地。漫步其中感受莊嚴神秘氣息。</p>
-                <a href="https://www.google.com/maps/search/吉備津神社" target="_blank" class="btn btn-nav">📍 地圖導航</a>
+                <p class="description">沿著山丘起伏而築的 360 公尺木造長廊極具震撼力，是桃太郎傳說的發源地，古老莊嚴。</p>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 神社導航</a>
             </div></div>
         </div>
         <div class="stay"><strong>🏨 住宿：多美迎倉敷 (Dormy Inn)</strong></div>
@@ -156,37 +160,24 @@
 
     <div id="day3" class="day-content">
         <div class="item">
-            <button class="item-header">栗林公園 (高松) 🌲 <span class="arrow">▼</span></button>
+            <button class="item-header">栗林公園 🌲 <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">被譽為「一步一景」的米其林三星園林，景色壯麗。六個水池與十三座築山構成極致美景。</p>
-                <a href="https://www.google.com/maps/search/栗林公園" target="_blank" class="btn btn-nav">📍 地圖導航</a>
+                <p class="description">一步一景的高松名勝。擁有六個池塘與十三座築山，借景紫雲山，展現出極致的庭園藝術。</p>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 栗林公園導航</a>
             </div></div>
         </div>
         <div class="item">
             <button class="item-header">金刀比羅宮 ⛩️ <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">挑戰千階石梯參拜海上守護神，登頂可俯瞰讚岐平原。是一生必去一次的聖地。</p>
-                <a href="https://www.google.com/maps/search/金刀比羅宮" target="_blank" class="btn btn-nav">📍 地圖導航</a>
+                <p class="description">前往海之神明的參拜之路。雖然需攀登千階石梯，但登高望遠的讚岐平原美景絕對值得。</p>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 神社導航</a>
             </div></div>
         </div>
         <div class="item">
-            <button class="item-header">高松中央郵便局 (呆呆獸郵筒) 📮 <span class="arrow">▼</span></button>
+            <button class="item-header">讚岐烏龍麵 🍜 <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">香川縣限定！超可愛的呆呆獸造型郵筒，是寶可夢迷來到高松必拍的特色景點。</p>
-                <a href="https://www.google.com/maps/search/高松中央郵便局" target="_blank" class="btn btn-nav">📍 地圖導航</a>
-            </div></div>
-        </div>
-        <div class="item">
-            <button class="item-header">讚岐烏龍麵名店 (竹清/綿谷) 🍜 <span class="arrow">▼</span></button>
-            <div class="item-body"><div class="inner">
-                <p class="description">來到發源地高松，必吃Q彈有勁且道地烏龍麵。自助式點餐體驗與香醇高湯極具特色。</p>
-                <div class="memo">🍽️ 推薦清單：自助烏龍麵竹清、麵處綿谷。</div>
-            </div></div>
-        </div>
-        <div class="item">
-            <button class="item-header">伴手禮推薦 (KUTSUWA堂/讚岐麵業) 🎁 <span class="arrow">▼</span></button>
-            <div class="item-body"><div class="inner">
-                <p class="description">選購特色瓦形甜餅乾或高品質生烏龍麵。將高松的在地美味帶回家與親友分享。</p>
+                <p class="description">高松必吃！Q 彈有勁的烏龍麵搭配鮮甜高湯，推薦清清或綿谷，品味純粹的在地靈魂美食。</p>
+                <div class="memo">💡 伴手禮：KUTSUWA 堂瓦形餅乾。</div>
             </div></div>
         </div>
         <div class="stay"><strong>🏨 住宿：多美迎倉敷 (Dormy Inn)</strong></div>
@@ -194,46 +185,38 @@
 
     <div id="day4" class="day-content">
         <div class="item">
-            <button class="item-header">倉敷乘船體驗 🛶 <span class="arrow">▼</span></button>
+            <button class="item-header">倉敷日間乘船 🛶 <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">搭乘小木船從水面視角感受美觀地區古意。早上需先至乘船場購買船票預約時段。</p>
-                <a href="https://www.google.com/maps/search/倉敷川舟流し" target="_blank" class="btn btn-nav">📍 乘船處導航</a>
+                <p class="description">白天搭乘小木船穿梭於運河間。體驗水上視角的古鎮魅力，建議早上先至乘船場購票。</p>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 乘船場導航</a>
             </div></div>
         </div>
         <div class="item">
-            <button class="item-header">牛仔褲街 (兒島) 👖 <span class="arrow">▼</span></button>
+            <button class="item-header">移動：倉敷 → 京都 🚅 <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">日本丹寧聖地，可尋找高品質手工牛仔服飾。街道掛滿牛仔褲的景象非常壯觀好拍。</p>
-                <a href="https://www.google.com/maps/search/兒島牛仔褲街" target="_blank" class="btn btn-nav">📍 地圖導航</a>
+                <p class="description">下午告別倉敷前往京都。搭乘新幹線經新大阪轉乘 Haruka 或快速車前往京都車站。</p>
             </div></div>
         </div>
         <div class="stay">
             <strong>🏨 住宿：京都四條烏丸佳閣酒店</strong>
-            <p class="description">今日移動至京都。飯店位於市中心精華區，購物與交通皆極為便利。</p>
-            <a href="https://maps.app.goo.gl/Kw9gz8rH7CKKaTwu9" target="_blank" class="btn btn-nav">📍 飯店位置</a>
+            <p class="description">位於京都精華區。入住後可先於周邊逛逛，感受古都第一晚的繁華氣息。</p>
+            <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 飯店導航</a>
         </div>
     </div>
 
     <div id="day5" class="day-content">
         <div class="item">
-            <button class="item-header">金閣寺 ✨ <span class="arrow">▼</span></button>
+            <button class="item-header">金閣寺 (鹿苑寺) ✨ <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">閃耀金箔外牆映照鏡湖池，是京都最具代表性的美景。早起前往避開人潮光線最佳。</p>
-                <a href="https://www.google.com/maps/search/金閣寺" target="_blank" class="btn btn-nav">📍 地圖導航</a>
+                <p class="description">閃耀金箔的舍利殿映照在鏡湖池中，光芒萬丈。是京都最負盛名且極致華麗的標誌景觀。</p>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 金閣寺導航</a>
             </div></div>
         </div>
         <div class="item">
             <button class="item-header">空禪亭 豬排飯 🍱 <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">京都極致炸豬排，職人火侯掌握精確，外酥內嫩多汁。📌 預約：13:30 (4位)/14:00 (2位)。</p>
-                <a href="https://maps.app.goo.gl/uaokxHXMZXE5ptkC7" target="_blank" class="btn btn-nav">🍴 餐廳導航</a>
-            </div></div>
-        </div>
-        <div class="item">
-            <button class="item-header">野菜居酒屋 おにかい 🏮 <span class="arrow">▼</span></button>
-            <div class="item-body"><div class="inner">
-                <p class="description">隱身於老建築二樓的特色居酒屋。以新鮮蔬菜製作精緻料理，感受現代京都飲食風味。</p>
-                <a href="https://maps.app.goo.gl/eQFnWfut2hMGnHEc7" target="_blank" class="btn btn-nav">🍴 餐廳導航</a>
+                <p class="description">極品炸豬排。職人火侯掌握精確，外酥內嫩多汁。📌 預約：13:30 (4位)/14:00 (2位)。</p>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">🍴 餐廳導航</a>
             </div></div>
         </div>
         <div class="stay"><strong>🏨 住宿：京都四條烏丸佳閣酒店</strong></div>
@@ -241,17 +224,17 @@
 
     <div id="day6" class="day-content">
         <div class="item">
-            <button class="item-header">奈良：東大寺/餵鹿/採草莓 🦌 <span class="arrow">▼</span></button>
+            <button class="item-header">奈良公園 & 東大寺 🦌 <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">在奈良公園與鹿互動，參拜莊嚴的世界最大木造大佛。冬天不可錯過在地的草莓採收。</p>
-                <a href="https://www.google.com/maps/search/東大寺" target="_blank" class="btn btn-nav">📍 地圖導航</a>
+                <p class="description">參拜莊嚴的世界最大木造大佛。隨後在公園與可愛鹿群互動、餵食仙貝並體驗採草莓。</p>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 東大寺導航</a>
             </div></div>
         </div>
         <div class="item">
-            <button class="item-header">宇治：平等院/抹茶 🍵 <span class="arrow">▼</span></button>
+            <button class="item-header">宇治平等院 ⛩️ <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">欣賞鳳凰堂建築美學，品味純正宇治抹茶的甘醇滋味。感受世界文化遺產的寧靜。</p>
-                <a href="https://www.google.com/maps/search/平等院" target="_blank" class="btn btn-nav">📍 地圖導航</a>
+                <p class="description">欣賞日幣十元硬幣上的鳳凰堂建築美學。感受宇治川畔的茶鄉氛圍並享用濃郁抹茶冰。</p>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 平等院導航</a>
             </div></div>
         </div>
         <div class="stay"><strong>🏨 住宿：京都四條烏丸佳閣酒店</strong></div>
@@ -259,16 +242,18 @@
 
     <div id="day7" class="day-content">
         <div class="item">
-            <button class="item-header">京都市區採購 🛍️ <span class="arrow">▼</span></button>
+            <button class="item-header">機場交通：京都 → KIX 🚆 <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">最後衝刺！在京都四條與河原町一帶購買藥妝、零食與伴手禮，隨後搭車前往機場。</p>
+                <p class="description">12:00 出發。搭乘 Haruka 特急列車由京都車站直達關西機場，旅途最後可欣賞沿途風景。</p>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 京都車站導航</a>
+                <a href="https://maps.app.goo.gl/K8T8G9f8K8T8G9f8" target="_blank" class="btn btn-nav">📍 關西機場導航</a>
             </div></div>
         </div>
         <div class="item">
-            <button class="item-header">CX565 航班回程 ✈️ <span class="arrow">▼</span></button>
+            <button class="item-header">CX565 航班追蹤 (16:15) ✈️ <span class="arrow">▼</span></button>
             <div class="item-body"><div class="inner">
-                <p class="description">國泰航空高品質服務，讓旅程在舒適中畫下完美句點。預計 16:15 關西機場起飛。</p>
-                <a href="https://www.flightradar24.com/data/flights/cx565" target="_blank" class="btn btn-flight">✈️ 查看即時狀態</a>
+                <p class="description">國泰航空 KIX ✈️ TPE。預計 18:30 抵達桃園，帶著滿滿的回憶與伴手禮平安歸家。</p>
+                <a href="https://www.flightradar24.com/data/flights/cx565" target="_blank" class="btn btn-flight">✈️ 即時航班狀態</a>
             </div></div>
         </div>
     </div>
