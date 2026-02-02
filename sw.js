@@ -1,5 +1,5 @@
-const CACHE_NAME = 'japan-trip-v1';
-const ASSETS = ['./index.html', './manifest.json'];
+const CACHE_NAME = 'japan-trip-v2';
+const ASSETS = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE_NAME).then((c) => c.addAll(ASSETS)));
